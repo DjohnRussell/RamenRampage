@@ -4,5 +4,6 @@ enum class AppScreens {
     Discover,
     Feed,
     LocationSpotted,
-    Profile
+    Profile,
+    Message
 }

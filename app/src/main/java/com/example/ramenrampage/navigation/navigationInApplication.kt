@@ -1,5 +1,7 @@
 package com.example.ramenrampage.navigation
 
+import android.content.res.Resources.Theme
+import androidx.annotation.ColorRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,13 +13,17 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.MailOutline
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Notifications
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -28,6 +34,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -39,6 +46,7 @@ import com.example.ramenrampage.R
 import com.example.ramenrampage.ui.screens.ActivityFeedScreen
 import com.example.ramenrampage.ui.screens.ActivtyLocationSpotted
 import com.example.ramenrampage.ui.screens.DiscoverScreen
+import com.example.ramenrampage.ui.screens.MessageScreen
 import com.example.ramenrampage.ui.screens.Profile
 
 
@@ -58,6 +66,7 @@ fun NavigationInApplication() {
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = colorResource(id = R.color.purple_500),
                     titleContentColor = Color.White
+
                 ),
                 title = {
                     Text(
@@ -67,7 +76,8 @@ fun NavigationInApplication() {
                     )
                 },
                 navigationIcon = {
-                    IconButton(onClick = { }) {
+                    IconButton(onClick = {
+                    }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Localized description",
@@ -141,6 +151,8 @@ fun NavigationInApplication() {
 
             composable(AppScreens.Profile.name) { Profile()}
 
+            composable(AppScreens.Message.name) { MessageScreen()}
+
         }
 
         }
@@ -149,9 +161,9 @@ fun NavigationInApplication() {
 
 val items = listOf(
 
-    BottomNavItems(AppScreens.Feed, Icons.Default.List, "Activity"),
-    BottomNavItems(AppScreens.Profile, Icons.Default.Notifications, "Notification"),
-    BottomNavItems(AppScreens.Profile, Icons.Default.AccountCircle, "Profile")
+    BottomNavItems(AppScreens.Feed, Icons.Default.MoreVert, "Activity"),
+    BottomNavItems(AppScreens.Message, Icons.Default.MailOutline, "Message"),
+    BottomNavItems(AppScreens.Profile, Icons.Default.Person, "Profile")
 )
 
 
