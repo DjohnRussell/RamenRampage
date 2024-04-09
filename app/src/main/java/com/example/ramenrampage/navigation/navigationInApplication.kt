@@ -94,7 +94,7 @@ fun NavigationInApplication() {
                 CenterAlignedTopAppBar(
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                         containerColor = Color.Transparent, // Make the AppBar container transparent
-                        titleContentColor = Color.White
+                        titleContentColor = Color.Black
                     ),
                     title = {
                         Text(
@@ -104,24 +104,27 @@ fun NavigationInApplication() {
                         )
                     },
                     navigationIcon = {
+
                         IconButton(onClick = {
                             // Handle back icon click
                         }) {
                             Icon(
                                 imageVector = Icons.Filled.ArrowBack,
                                 contentDescription = "Back",
-                                tint = Color.White
+                                tint =  Color.Black
                             )
                         }
                     },
                     actions = {
+
                         IconButton(onClick = {
                             // Handle settings icon click
+
                         }) {
                             Icon(
                                 imageVector = Icons.Filled.Settings,
                                 contentDescription = "Settings",
-                                tint = Color.White
+                                tint =  Color.Black
                             )
                         }
                     },
@@ -152,11 +155,11 @@ fun NavigationInApplication() {
                                 imageVector = item.icon,
                                 contentDescription = item.label,
                                 modifier = Modifier.size(30.dp),
-                                tint = if (isSelected) colorResource(id = R.color.black) else Color.White
+                                tint = if (isSelected) colorResource(id = R.color.white) else Color.Black
                             )
                             Text(
                                 text = item.label,
-                                color = if (isSelected) colorResource(id = R.color.black) else Color.White
+                                color = if (isSelected) colorResource(id = R.color.white) else Color.Black
                             )
                         }
                     }
