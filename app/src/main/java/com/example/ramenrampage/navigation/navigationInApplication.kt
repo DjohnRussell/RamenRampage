@@ -1,21 +1,23 @@
 package com.example.ramenrampage.navigation
 
-import android.content.res.Resources.Theme
-import androidx.annotation.ColorRes
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.BottomAppBar
@@ -23,7 +25,6 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -33,8 +34,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorMatrix
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -62,47 +63,71 @@ fun NavigationInApplication() {
 
     Scaffold(topBar = {
         if (isTopAppVisible.value) {
-            CenterAlignedTopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = colorResource(id = R.color.purple_500),
-                    titleContentColor = Color.White
-
-                ),
-                title = {
-                    Text(
-                        "Ramen Rampage",
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = {
-                    }) {
-                        Icon(
-                            imageVector = Icons.Filled.ArrowBack,
-                            contentDescription = "Localized description",
-                            tint = Color.White
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = {
-                        // Handle settings icon click
-
-                    }) {
-                        Icon(
-                            imageVector = Icons.Filled.Settings,
-                            contentDescription = "Localized description",
-                            tint = Color.White
-                        )
-                    }
-
-                }
+            // Define the gradient
+            val gradient = Brush.linearGradient(
+                colors = listOf(
+                    Color(0xFFFFA500), // Orange
+                    Color(0xFFFFFF00)  // Yellow
+                )
             )
+
+            // TopAppBar title based on currentRoute
+            val title = when (currentRoute) {
+                AppScreens.Discover.name -> "Discover"
+                AppScreens.Feed.name -> "Activity"
+                AppScreens.LocationSpotted.name -> "Location Spotted"
+                AppScreens.Profile.name -> "Profile"
+                // Add other screens
+                else -> "Ramen Rampage"
+            }
+
+            // Apply the gradient as a background to a Box, Column, or any suitable composable
+            // that fills the top bar area.
+            Column(modifier = Modifier
+                .background(gradient)
+                .fillMaxWidth()
+                .padding(top = WindowInsets.statusBars.asPaddingValues().calculateTopPadding())) {
+                CenterAlignedTopAppBar(
+                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = Color.Transparent, // Make the AppBar container transparent
+                        titleContentColor = Color.White
+                    ),
+                    title = {
+                        Text(
+                            title,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            // Handle back icon click
+                        }) {
+                            Icon(
+                                imageVector = Icons.Filled.ArrowBack,
+                                contentDescription = "Back",
+                                tint = Color.White
+                            )
+                        }
+                    },
+                    actions = {
+                        IconButton(onClick = {
+                            // Handle settings icon click
+                        }) {
+                            Icon(
+                                imageVector = Icons.Filled.Settings,
+                                contentDescription = "Settings",
+                                tint = Color.White
+                            )
+                        }
+                    },
+                    windowInsets = WindowInsets.statusBars.only(WindowInsetsSides.Top)
+                )
+            }
         }
     }, bottomBar = {
         if (isBottomBarVisible.value) {
-            BottomAppBar(containerColor = colorResource(R.color.purple_500)) {
+            BottomAppBar(containerColor = colorResource(R.color.orange_500)) {
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
@@ -159,6 +184,7 @@ fun NavigationInApplication() {
 
         }
 
+//List of Icons and text for navbar(bottom bar)
 val items = listOf(
 
     BottomNavItems(AppScreens.Feed, Icons.Default.MoreVert, "Activity"),
