@@ -90,11 +90,15 @@ fun NavigationInApplication() {
             Column(modifier = Modifier
                 .background(gradient)
                 .fillMaxWidth()
-                .padding(top = WindowInsets.statusBars.asPaddingValues().calculateTopPadding())) {
+                .padding(
+                    top = WindowInsets.statusBars
+                        .asPaddingValues()
+                        .calculateTopPadding()
+                )) {
                 CenterAlignedTopAppBar(
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                         containerColor = Color.Transparent, // Make the AppBar container transparent
-                        titleContentColor = Color.Black
+                        titleContentColor = colorResource(id = R.color.blueberry_ble)
                     ),
                     title = {
                         Text(
@@ -111,7 +115,7 @@ fun NavigationInApplication() {
                             Icon(
                                 imageVector = Icons.Filled.ArrowBack,
                                 contentDescription = "Back",
-                                tint =  Color.Black
+                                tint =  colorResource(id = R.color.blueberry_ble)
                             )
                         }
                     },
@@ -124,7 +128,7 @@ fun NavigationInApplication() {
                             Icon(
                                 imageVector = Icons.Filled.Settings,
                                 contentDescription = "Settings",
-                                tint =  Color.Black
+                                tint =  colorResource(id = R.color.blueberry_ble)
                             )
                         }
                     },
@@ -155,11 +159,15 @@ fun NavigationInApplication() {
                                 imageVector = item.icon,
                                 contentDescription = item.label,
                                 modifier = Modifier.size(30.dp),
-                                tint = if (isSelected) colorResource(id = R.color.white) else Color.Black
+                                tint = if (isSelected) colorResource(id = R.color.white) else colorResource(
+                                    id = R.color.blueberry_ble
+                                )
                             )
                             Text(
                                 text = item.label,
-                                color = if (isSelected) colorResource(id = R.color.white) else Color.Black
+                                color = if (isSelected) colorResource(id = R.color.white) else colorResource(
+                                    id = R.color.blueberry_ble
+                                )
                             )
                         }
                     }
