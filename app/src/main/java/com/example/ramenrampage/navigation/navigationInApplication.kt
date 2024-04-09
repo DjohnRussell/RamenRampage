@@ -20,6 +20,9 @@ import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.MailOutline
+import androidx.compose.material.icons.outlined.MoreVert
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -77,6 +80,7 @@ fun NavigationInApplication() {
                 AppScreens.Feed.name -> "Activity"
                 AppScreens.LocationSpotted.name -> "Location Spotted"
                 AppScreens.Profile.name -> "Profile"
+                AppScreens.Message.name -> "Message"
                 // Add other screens
                 else -> "Ramen Rampage"
             }
@@ -187,9 +191,9 @@ fun NavigationInApplication() {
 //List of Icons and text for navbar(bottom bar)
 val items = listOf(
 
-    BottomNavItems(AppScreens.Feed, Icons.Default.MoreVert, "Activity"),
-    BottomNavItems(AppScreens.Message, Icons.Default.MailOutline, "Message"),
-    BottomNavItems(AppScreens.Profile, Icons.Default.Person, "Profile")
+    BottomNavItems(AppScreens.Feed, Icons.Outlined.MoreVert, "Activity"),
+    BottomNavItems(AppScreens.Message, Icons.Outlined.MailOutline, "Message"),
+    BottomNavItems(AppScreens.Profile, Icons.Outlined.Person, "Profile")
 )
 
 
