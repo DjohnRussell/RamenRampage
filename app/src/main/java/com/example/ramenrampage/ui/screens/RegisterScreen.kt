@@ -13,20 +13,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ramenrampage.R
 import com.example.ramenrampage.ui.screens.viewModels.FirebaseViewModel
 
 @Composable
-fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit) {
+fun RegisterScreen(toLogin: ()-> Unit) {
     val firebaseViewModel: FirebaseViewModel = viewModel()
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -57,8 +56,8 @@ fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit) {
 
         SpaceEm(40)
 
-        Button(onClick = { takeMeHome();
-            firebaseViewModel.loginUser()},
+        Button(onClick = { toLogin();
+            firebaseViewModel.registerUser()},
             colors = ButtonDefaults.buttonColors(
                 containerColor = colorResource(id =
                 R.color.blueberry_ble)
@@ -67,42 +66,9 @@ fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit) {
             Text(text = "Sign in")
         }
 
-        SpaceEm(amount = 10)
 
-        TextAndClick(loginOrSignUp = { meMeAUser() },
-            text = "Register NOW",
-            colorText = colorResource(id = R.color.blueberry_ble))
 
-        SpaceEm(30)
 
-        ClickableTextWithToast(text = "Forgot password ? ",
-            toastMessage = "Reset link sent to provided email \uD83D\uDCE9")
-
-    }
 }
-
-
-//----------------Small composes-----------------------
-
-
-@Composable
-fun ClickableTextWithToast(text: String, toastMessage: String) {
-    val context = LocalContext.current
-    Text(
-        text = text,
-        color = Color.Red,
-        modifier = Modifier.clickable {
-            Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
-
-        }
-    )
 }
-
-@Composable
-fun ToastToShow(toastMessage: String) {
-    val context = LocalContext.current
-    Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
-}
-
-
 

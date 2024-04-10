@@ -7,5 +7,6 @@ enum class AppScreens {
     Profile,
     Message,
     Welcome,
-    Login
+    Login,
+    Register
 }

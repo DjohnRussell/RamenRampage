@@ -17,10 +17,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.ramenrampage.R
-
 
 
 @Composable
@@ -50,14 +51,17 @@ fun WelcomeScreen(start: () -> Unit, loginOrSignUp: ()-> Unit) {
             TextAndClick(loginOrSignUp = {
                 loginOrSignUp()
             },
-                text = "Login or SignUp" )
+                text = "Login or Sign Up",
+                colorResource(id = R.color.blueberry_ble))
             
             SpaceEm(amount = 10)
 
             TextAndClick(loginOrSignUp = {
                 start()
             },
-                text =  "Preview App")
+                text =  "Deal with it later",
+                colorResource(id = R.color.blueberry_ble)
+            )
 
 
         }
@@ -79,12 +83,14 @@ fun SpaceEm(amount: Int) {
 }
 
 @Composable
-fun TextAndClick(loginOrSignUp : () -> Unit, text: String) {
+fun TextAndClick(loginOrSignUp : () -> Unit, text: String, colorText: Color) {
     Text(
         modifier = Modifier.clickable {
             loginOrSignUp()
         },
-        text = text)
+        text = text,
+        color= colorText,
+        fontSize = 17.sp)
 }
 
 

@@ -55,6 +55,7 @@ import com.example.ramenrampage.ui.screens.DiscoverScreen
 import com.example.ramenrampage.ui.screens.Login_registerScreen
 import com.example.ramenrampage.ui.screens.MessageScreen
 import com.example.ramenrampage.ui.screens.Profile
+import com.example.ramenrampage.ui.screens.RegisterScreen
 import com.example.ramenrampage.ui.screens.WelcomeScreen
 
 
@@ -85,7 +86,8 @@ fun NavigationInApplication() {
                 AppScreens.LocationSpotted.name -> "Location Spotted"
                 AppScreens.Profile.name -> "Profile"
                 AppScreens.Message.name -> "Message"
-                AppScreens.Login.name -> "Login/Register"
+                AppScreens.Login.name -> "Login"
+                AppScreens.Register.name -> "Register"
                 // Add other screens
                 else -> "Ramen Rampage"
             }
@@ -222,7 +224,15 @@ fun NavigationInApplication() {
             composable(AppScreens.Login.name) {
                 isBottomBarVisible.value = true
                 isTopAppVisible.value = true
-                Login_registerScreen()
+                Login_registerScreen(
+                    takeMeHome = {navController.navigate(AppScreens.Discover.name)},
+                    meMeAUser = {navController.navigate(AppScreens.Register.name)} )
+            }
+
+            composable(AppScreens.Register.name) {
+                isBottomBarVisible.value = true
+                isTopAppVisible.value = true
+                RegisterScreen(toLogin = {navController.navigate(AppScreens.Login.name)})
             }
 
         }
