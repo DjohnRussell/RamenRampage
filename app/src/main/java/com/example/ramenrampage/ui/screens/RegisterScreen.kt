@@ -63,7 +63,7 @@ fun RegisterScreen(toLogin: ()-> Unit) {
                 R.color.blueberry_ble)
             )
         ) {
-            Text(text = "Sign in")
+            Text(text = "Sign up")
         }
 
 
