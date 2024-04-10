@@ -20,6 +20,8 @@ import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.MailOutline
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.Person
@@ -50,8 +52,10 @@ import com.example.ramenrampage.R
 import com.example.ramenrampage.ui.screens.ActivityFeedScreen
 import com.example.ramenrampage.ui.screens.ActivtyLocationSpotted
 import com.example.ramenrampage.ui.screens.DiscoverScreen
+import com.example.ramenrampage.ui.screens.Login_registerScreen
 import com.example.ramenrampage.ui.screens.MessageScreen
 import com.example.ramenrampage.ui.screens.Profile
+import com.example.ramenrampage.ui.screens.WelcomeScreen
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -81,6 +85,7 @@ fun NavigationInApplication() {
                 AppScreens.LocationSpotted.name -> "Location Spotted"
                 AppScreens.Profile.name -> "Profile"
                 AppScreens.Message.name -> "Message"
+                AppScreens.Login.name -> "Login/Register"
                 // Add other screens
                 else -> "Ramen Rampage"
             }
@@ -110,10 +115,10 @@ fun NavigationInApplication() {
                     navigationIcon = {
 
                         IconButton(onClick = {
-                            // Handle back icon click
+                            TODO()
                         }) {
                             Icon(
-                                imageVector = Icons.Filled.ArrowBack,
+                                imageVector = Icons.Outlined.ArrowBack,
                                 contentDescription = "Back",
                                 tint =  colorResource(id = R.color.blueberry_ble)
                             )
@@ -122,12 +127,12 @@ fun NavigationInApplication() {
                     actions = {
 
                         IconButton(onClick = {
-                            // Handle settings icon click
+                            navController.navigate(AppScreens.Login.name)
 
                         }) {
                             Icon(
-                                imageVector = Icons.Filled.Settings,
-                                contentDescription = "Settings",
+                                imageVector = Icons.Outlined.AccountCircle,
+                                contentDescription = "Login",
                                 tint =  colorResource(id = R.color.blueberry_ble)
                             )
                         }
@@ -179,19 +184,46 @@ fun NavigationInApplication() {
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = AppScreens.Discover.name,
+            startDestination = AppScreens.Welcome.name,
             Modifier.padding(innerPadding)
         ) {
 
-            composable(AppScreens.Discover.name) { DiscoverScreen()}
+            composable(AppScreens.Welcome.name) {
+                isTopAppVisible.value = false
+                isBottomBarVisible.value = false
+                WelcomeScreen(start = {navController.navigate(AppScreens.Discover.name)},
+                    loginOrSignUp = {navController.navigate(AppScreens.Login.name)})}
 
-            composable(AppScreens.Feed.name) { ActivityFeedScreen()}
+            composable(AppScreens.Discover.name) {
+                isBottomBarVisible.value = true
+                isTopAppVisible.value = true
+                DiscoverScreen()}
 
-            composable(AppScreens.LocationSpotted.name) { ActivtyLocationSpotted()}
+            composable(AppScreens.Feed.name) {
+                isBottomBarVisible.value = true
+                isTopAppVisible.value = true
+                ActivityFeedScreen()}
 
-            composable(AppScreens.Profile.name) { Profile()}
+            composable(AppScreens.LocationSpotted.name) {
+                isBottomBarVisible.value = true
+                isTopAppVisible.value = true
+                ActivtyLocationSpotted()}
 
-            composable(AppScreens.Message.name) { MessageScreen()}
+            composable(AppScreens.Profile.name) {
+                isBottomBarVisible.value = true
+                isTopAppVisible.value = true
+                Profile()}
+
+            composable(AppScreens.Message.name) {
+                isBottomBarVisible.value = true
+                isTopAppVisible.value = true
+                MessageScreen()}
+
+            composable(AppScreens.Login.name) {
+                isBottomBarVisible.value = true
+                isTopAppVisible.value = true
+                Login_registerScreen()
+            }
 
         }
 
