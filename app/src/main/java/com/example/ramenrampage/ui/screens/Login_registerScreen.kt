@@ -22,11 +22,14 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ramenrampage.R
+import com.example.ramenrampage.navigation.AppScreens
 import com.example.ramenrampage.ui.screens.viewModels.FirebaseViewModel
+import com.google.firebase.auth.FirebaseUser
 
 @Composable
 fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit) {
     val firebaseViewModel: FirebaseViewModel = viewModel()
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -56,6 +59,29 @@ fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit) {
         )
 
         SpaceEm(40)
+        TODO("Fix the logic under to only enter app if valid credentials is enterd")
+      //  Button(
+      //      onClick = {
+      //          // Attempt to log in the user
+      //
+      //          firebaseViewModel.loginUser()
+      //
+      //          // Check if login was successful
+      //         if (!firebaseViewModel.loginSuccess.value) {
+      //       //      // Display a toast indicating login failure
+      //       //      ToastToShow("Login failed. Please check your credentials.")
+      //        } else {
+      //       //      // Navigate to the home screen if login was successful
+      //           takeMeHome()
+      //       //  }
+
+      //      },
+       //     colors = ButtonDefaults.buttonColors(
+       //         containerColor = colorResource(id = R.color.blueberry_ble)
+       //     )
+       // ) {
+       //     Text(text = "Sign in")
+       // }
 
         Button(onClick = { takeMeHome();
             firebaseViewModel.loginUser()},
@@ -103,6 +129,8 @@ fun ToastToShow(toastMessage: String) {
     val context = LocalContext.current
     Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
 }
+
+
 
 
 

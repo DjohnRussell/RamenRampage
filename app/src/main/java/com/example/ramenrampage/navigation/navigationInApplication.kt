@@ -15,11 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.MailOutline
-import androidx.compose.material.icons.filled.MoreVert
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.MailOutline
@@ -57,17 +52,23 @@ import com.example.ramenrampage.ui.screens.MessageScreen
 import com.example.ramenrampage.ui.screens.Profile
 import com.example.ramenrampage.ui.screens.RegisterScreen
 import com.example.ramenrampage.ui.screens.WelcomeScreen
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NavigationInApplication() {
+fun NavigationInApplication(auth: FirebaseAuth) {
     val navController = rememberNavController()
     val isBottomBarVisible = remember { mutableStateOf(true) }
     val isTopAppVisible = remember { mutableStateOf(true) }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     val currentSelectedItem = remember { mutableStateOf(AppScreens.Discover) }
+
+    // Check authentication status
+    val currentUser = auth.currentUser
+    val startDestination = determineStartDestination(auth.currentUser)
 
     Scaffold(topBar = {
         if (isTopAppVisible.value) {
@@ -186,7 +187,7 @@ fun NavigationInApplication() {
     ) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = AppScreens.Welcome.name,
+            startDestination = startDestination,
             Modifier.padding(innerPadding)
         ) {
 
@@ -214,7 +215,7 @@ fun NavigationInApplication() {
             composable(AppScreens.Profile.name) {
                 isBottomBarVisible.value = true
                 isTopAppVisible.value = true
-                Profile()}
+                Profile(throwOut = {navController.navigate(AppScreens.Welcome.name)})}
 
             composable(AppScreens.Message.name) {
                 isBottomBarVisible.value = true
@@ -248,6 +249,17 @@ val items = listOf(
     BottomNavItems(AppScreens.Message, Icons.Outlined.MailOutline, "Message"),
     BottomNavItems(AppScreens.Profile, Icons.Outlined.Person, "Profile")
 )
+
+
+private fun determineStartDestination(currentUser: FirebaseUser?): String {
+    return if (currentUser != null) {
+        AppScreens.Discover.name
+    } else {
+        AppScreens.Welcome.name
+    }
+}
+
+
 
 
 

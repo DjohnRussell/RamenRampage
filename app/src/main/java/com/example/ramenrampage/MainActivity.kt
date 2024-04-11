@@ -6,16 +6,20 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.ramenrampage.navigation.NavigationInApplication
 import com.example.ramenrampage.ui.theme.RamenRampageTheme
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : ComponentActivity() {
+
+    private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        auth = FirebaseAuth.getInstance()
         setContent {
             RamenRampageTheme {
                 // A surface container using the 'background' color from the theme
@@ -24,7 +28,7 @@ class MainActivity : ComponentActivity() {
 
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    NavigationInApplication()
+                    NavigationInApplication(auth)
                 }
             }
         }

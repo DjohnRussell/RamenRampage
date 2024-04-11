@@ -21,6 +21,8 @@ class FirebaseViewModel : ViewModel() {
     private var _password = mutableStateOf("")
     val password = _password
 
+
+
     fun registerUser() {
         val emailValue = email.value
         val passwordValue = password.value
@@ -52,5 +54,12 @@ class FirebaseViewModel : ViewModel() {
             }
         }
     }
+
+    fun logOut() {
+        auth.signOut()
+    }
+
+
+
 
 }
