@@ -21,12 +21,19 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.ramenrampage.R
+
 import com.example.ramenrampage.ui.screens.viewModels.FirebaseViewModel
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.time.delay
 
+
+
+
 @Composable
-fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit) {
+fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit, auth: FirebaseAuth ) {
     val firebaseViewModel: FirebaseViewModel = viewModel()
+
+
 
 
     Column(
@@ -58,17 +65,20 @@ fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit) {
 
         SpaceEm(40)
 
-        Button(onClick = {
-            firebaseViewModel.loginUser()
+     //  Button(onClick = {
+     //      firebaseViewModel.loginUser()
 
-            takeMeHome()},
-            colors = ButtonDefaults.buttonColors(
-                containerColor = colorResource(id =
-                R.color.blueberry_ble)
-            )
-        ) {
-            Text(text = "Sign in")
-        }
+     //      takeMeHome()},
+     //      colors = ButtonDefaults.buttonColors(
+     //          containerColor = colorResource(id =
+     //          R.color.blueberry_ble)
+     //      )
+     //  ) {
+     //      Text(text = "Sign in")
+     //  }
+
+        ButtonWithToast(firebaseViewModel, { takeMeHome() }, "Sign in",auth = auth,
+            "Failed to sign in" )
 
         SpaceEm(amount = 10)
 
@@ -85,8 +95,30 @@ fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit) {
 }
 
 
-//----------------Small composes-----------------------
+//---------------------------------------
 
+@Composable
+fun ButtonWithToast(
+    firebaseViewModel: FirebaseViewModel,
+    takeMeHome: () -> Unit,
+    buttonText: String,
+    auth: FirebaseAuth,
+    toastMessage: String
+) {
+    val currentUser = auth.currentUser
+    val context = LocalContext.current
+
+    Button(onClick = {
+        firebaseViewModel.loginUser()
+        takeMeHome()
+
+        if (currentUser == null) {
+            Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+        }
+    }) {
+        Text(text = buttonText)
+    }
+}
 
 @Composable
 fun ClickableTextWithToast(text: String, toastMessage: String) {
