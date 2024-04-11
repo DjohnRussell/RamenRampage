@@ -51,6 +51,7 @@ import com.example.ramenrampage.ui.screens.Login_registerScreen
 import com.example.ramenrampage.ui.screens.MessageScreen
 import com.example.ramenrampage.ui.screens.Profile
 import com.example.ramenrampage.ui.screens.RegisterScreen
+import com.example.ramenrampage.ui.screens.ToastToShow
 import com.example.ramenrampage.ui.screens.WelcomeScreen
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -226,7 +227,13 @@ fun NavigationInApplication(auth: FirebaseAuth) {
                 isBottomBarVisible.value = true
                 isTopAppVisible.value = true
                 Login_registerScreen(
-                    takeMeHome = {navController.navigate(AppScreens.Discover.name)},
+                    takeMeHome = {
+                        // checking if user credentials is a match
+                        if (currentUser != null) {
+                            navController.navigate(AppScreens.Discover.name)
+                        } else {
+                            navController.navigate(AppScreens.Login.name)
+                        } },
                     meMeAUser = {navController.navigate(AppScreens.Register.name)} )
             }
 
