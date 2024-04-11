@@ -83,14 +83,15 @@ fun SpaceEm(amount: Int) {
 }
 
 @Composable
-fun TextAndClick(loginOrSignUp : () -> Unit, text: String, colorText: Color) {
+fun TextAndClick(loginOrSignUp: () -> Unit, text: String, colorText: Color) {
     Text(
         modifier = Modifier.clickable {
             loginOrSignUp()
         },
         text = text,
-        color= colorText,
-        fontSize = 17.sp)
+        color = colorText,
+        fontSize = 17.sp
+    )
 }
 
 

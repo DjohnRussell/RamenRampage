@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,9 +23,6 @@ import com.example.ramenrampage.R
 
 import com.example.ramenrampage.ui.screens.viewModels.FirebaseViewModel
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.time.delay
-
-
 
 
 @Composable
@@ -65,20 +61,9 @@ fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit, auth: Fire
 
         SpaceEm(40)
 
-     //  Button(onClick = {
-     //      firebaseViewModel.loginUser()
-
-     //      takeMeHome()},
-     //      colors = ButtonDefaults.buttonColors(
-     //          containerColor = colorResource(id =
-     //          R.color.blueberry_ble)
-     //      )
-     //  ) {
-     //      Text(text = "Sign in")
-     //  }
 
         ButtonWithToast(firebaseViewModel, { takeMeHome() }, "Sign in",auth = auth,
-            "Failed to sign in" )
+            "Incorrect email or password. Please try again‼\uFE0F" )
 
         SpaceEm(amount = 10)
 
@@ -88,11 +73,24 @@ fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit, auth: Fire
 
         SpaceEm(30)
 
-        ClickableTextWithToast(text = "Forgot password ? ",
-            toastMessage = "Reset link sent to provided email \uD83D\uDCE9")
+        // Calculate the email to send
+        val emailToSend = if (firebaseViewModel.email.value.isNotBlank()) {
+            firebaseViewModel.email.value
+        } else {
+            null // Use null to represent no valid email, and handle it inside ClickableTextWithToast
+        }
+
+        // Pass the calculated email or null to the Composable
+        ClickableTextWithToast(
+            text = "Forgot password ?",
+            toastMessage = "Password reset link sent to provided email \uD83D\uDCE9",
+            auth = FirebaseAuth.getInstance(),
+            email = emailToSend
+        )
+    }
 
     }
-}
+
 
 
 //---------------------------------------
@@ -104,9 +102,11 @@ fun ButtonWithToast(
     buttonText: String,
     auth: FirebaseAuth,
     toastMessage: String
+
 ) {
     val currentUser = auth.currentUser
     val context = LocalContext.current
+
 
     Button(onClick = {
         firebaseViewModel.loginUser()
@@ -121,16 +121,41 @@ fun ButtonWithToast(
 }
 
 @Composable
-fun ClickableTextWithToast(text: String, toastMessage: String) {
+fun ClickableTextWithToast(
+    text: String,
+    toastMessage: String,
+    auth: FirebaseAuth,
+    email: String? // Accept null to handle no email provided
+) {
     val context = LocalContext.current
+
     Text(
         text = text,
         color = Color.Red,
         modifier = Modifier.clickable {
-            Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
-
+            if (email != null) {
+                auth.sendPasswordResetEmail(email)
+                    .addOnSuccessListener {
+                        Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener { e ->
+                        Toast.makeText(context, "Failed to send reset email: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                    }
+            } else {
+                Toast.makeText(context, "Please enter your email address before resetting your password", Toast.LENGTH_SHORT).show()
+            }
         }
     )
+}
+
+@Composable
+fun TextToster(text: String, message: String) {
+    val context = LocalContext.current
+    Text(text = text,
+        color = Color.Red,
+        modifier = Modifier.clickable {
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        })
 }
 
 @Composable
