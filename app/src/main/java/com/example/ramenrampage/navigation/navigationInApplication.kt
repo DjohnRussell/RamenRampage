@@ -21,6 +21,7 @@ import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.MailOutline
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -131,17 +132,27 @@ fun NavigationInApplication(auth: FirebaseAuth) {
                         }
                     },
                     actions = {
+                            if (currentUser != null){
+                                IconButton(onClick = {
 
-                        IconButton(onClick = {
-                            navController.navigate(AppScreens.Login.name)
-
-                        }) {
-                            Icon(
-                                imageVector = Icons.Outlined.AccountCircle,
-                                contentDescription = "Login",
-                                tint =  colorResource(id = R.color.blueberry_ble)
-                            )
+                                }) {
+                                    Icon(
+                                        imageVector = Icons.Outlined.Settings,
+                                        contentDescription = "User Settings",
+                                        tint =  colorResource(id = R.color.blueberry_ble)
+                                    )
+                                }
+                            }
+                        else {
+                            IconButton(onClick = {
+                                navController.navigate(AppScreens.Login.name)
+                            }) {
+                                Icon(imageVector = Icons.Outlined.AccountCircle,
+                                    contentDescription = "Login",
+                                    tint =  colorResource(id = R.color.blueberry_ble))
+                            }
                         }
+
                     },
                     windowInsets = WindowInsets.statusBars.only(WindowInsetsSides.Top)
                 )
@@ -226,7 +237,7 @@ fun NavigationInApplication(auth: FirebaseAuth) {
                 MessageScreen()}
 
             composable(AppScreens.Login.name) {
-                isBottomBarVisible.value = true
+                isBottomBarVisible.value = false
                 isTopAppVisible.value = true
                 Login_registerScreen(
                     takeMeHome = {
@@ -240,7 +251,7 @@ fun NavigationInApplication(auth: FirebaseAuth) {
             }
 
             composable(AppScreens.Register.name) {
-                isBottomBarVisible.value = true
+                isBottomBarVisible.value = false
                 isTopAppVisible.value = true
                 RegisterScreen(toLogin = {navController.navigate(AppScreens.Login.name)})
             }

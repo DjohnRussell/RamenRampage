@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "111122511737",
+    "project_id": "ramenrampage-e77ef",
+    "storage_bucket": "ramenrampage-e77ef.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:111122511737:android:4b1077bce471880ad761a8",
+        "android_client_info": {
+          "package_name": "com.example.ramenrampage"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDw9jw312XHqgdbxUoVy1C9XRMNZT_QuXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
