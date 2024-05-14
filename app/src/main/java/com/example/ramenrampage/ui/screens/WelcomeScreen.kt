@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.ramenrampage.R
@@ -51,7 +52,7 @@ fun WelcomeScreen(start: () -> Unit, loginOrSignUp: ()-> Unit) {
             TextAndClick(loginOrSignUp = {
                 loginOrSignUp()
             },
-                text = "Login or Sign Up",
+                text = stringResource(R.string.login_or_sign_up),
                 colorResource(id = R.color.blueberry_ble))
             
             SpaceEm(amount = 10)
@@ -59,7 +60,7 @@ fun WelcomeScreen(start: () -> Unit, loginOrSignUp: ()-> Unit) {
             TextAndClick(loginOrSignUp = {
                 start()
             },
-                text =  "Deal with it later",
+                text = stringResource(R.string.deal_with_it_later),
                 colorResource(id = R.color.blueberry_ble)
             )
 

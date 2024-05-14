@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RamenRampage</string>
+    <string name="email">E-post</string>
+    <string name="password">Passord</string>
+    <string name="sign_in">Logg inn</string>
+    <string name="incorrect_email_or_password_please_try_again">Feil brukernavn eller passord. Vennligst prøv igjen‼️</string>
+    <string name="register_now">Registrer nå</string>
+    <string name="forgot_password">Glemt Passord ?</string>
+    <string name="password_reset_link_sent_to_provided_email">Passord link sendt til den oppgitte E-post addresen 📩</string>
+    <string name="failed_to_send_reset_email">Tilbakestillings link feilet: %1$s</string>
+    <string name="please_enter_your_email_address_before_resetting_your_password">Vennligst fyll ut E-post addressen, før tilbakestilling</string>
+    <string name="sign_up">Opprett konto</string>
+    <string name="login_or_sign_up">Logg inn eller Registrer</string>
+    <string name="deal_with_it_later">Gjør det senere</string>
+</resources>

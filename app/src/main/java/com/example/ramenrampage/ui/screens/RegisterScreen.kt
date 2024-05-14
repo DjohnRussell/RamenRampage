@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -37,7 +38,7 @@ fun RegisterScreen(toLogin: ()-> Unit) {
 
         OutlinedTextField(value = firebaseViewModel.email.value,
             onValueChange =  {newValue -> firebaseViewModel.email.value = newValue},
-            label = { Text(text = "Email") },
+            label = { Text(text = stringResource(id = R.string.email)) },
             textStyle = TextStyle(color = colorResource(id = R.color.blueberry_ble))
         )
 
@@ -45,7 +46,7 @@ fun RegisterScreen(toLogin: ()-> Unit) {
 
         OutlinedTextField(value = firebaseViewModel.password.value ,
             onValueChange =  {newValue -> firebaseViewModel.password.value = newValue},
-            label = { Text(text = "Password") },
+            label = { Text(text = stringResource(id = R.string.password)) },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             textStyle = TextStyle(color = colorResource(id = R.color.blueberry_ble))
@@ -60,7 +61,7 @@ fun RegisterScreen(toLogin: ()-> Unit) {
                 R.color.blueberry_ble)
             )
         ) {
-            Text(text = "Sign up")
+            Text(text = stringResource(R.string.sign_up))
         }
 
 

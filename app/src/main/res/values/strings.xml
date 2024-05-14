@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">RamenRampage</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="incorrect_email_or_password_please_try_again">Incorrect email or password. Please try again‼️</string>
+    <string name="register_now">Register NOW</string>
+    <string name="forgot_password">Forgot password ?</string>
+    <string name="password_reset_link_sent_to_provided_email">Password reset link sent to provided email 📩</string>
+    <string name="failed_to_send_reset_email">Failed to send reset email: %1$s</string>
+    <string name="please_enter_your_email_address_before_resetting_your_password">Please enter your email address before resetting your password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="login_or_sign_up">Login or Sign Up</string>
+    <string name="deal_with_it_later">Deal with it later</string>
 </resources>

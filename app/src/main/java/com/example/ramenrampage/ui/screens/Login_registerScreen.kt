@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -45,7 +46,7 @@ fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit, auth: Fire
 
         OutlinedTextField(value = firebaseViewModel.email.value,
             onValueChange =  {newValue -> firebaseViewModel.email.value = newValue},
-            label = { Text(text = "Email") },
+            label = { Text(text = stringResource(R.string.email)) },
             textStyle = TextStyle(color = colorResource(id = R.color.blueberry_ble))
         )
 
@@ -53,7 +54,7 @@ fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit, auth: Fire
 
         OutlinedTextField(value = firebaseViewModel.password.value ,
             onValueChange =  {newValue -> firebaseViewModel.password.value = newValue},
-            label = { Text(text = "Password") },
+            label = { Text(text = stringResource(R.string.password)) },
             visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             textStyle = TextStyle(color = colorResource(id = R.color.blueberry_ble))
@@ -62,13 +63,14 @@ fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit, auth: Fire
         SpaceEm(40)
 
 
-        ButtonWithToast(firebaseViewModel, { takeMeHome() }, "Sign in",auth = auth,
-            "Incorrect email or password. Please try again‼\uFE0F" )
+        ButtonWithToast(firebaseViewModel, { takeMeHome() },
+            stringResource(R.string.sign_in),auth = auth,
+            stringResource(R.string.incorrect_email_or_password_please_try_again) )
 
         SpaceEm(amount = 10)
 
         TextAndClick(loginOrSignUp = { meMeAUser() },
-            text = "Register NOW",
+            text = stringResource(R.string.register_now),
             colorText = colorResource(id = R.color.blueberry_ble))
 
         SpaceEm(30)
@@ -82,8 +84,8 @@ fun Login_registerScreen(takeMeHome: ()-> Unit, meMeAUser: ()-> Unit, auth: Fire
 
         // Pass the calculated email or null to the Composable
         ClickableTextWithToast(
-            text = "Forgot password ?",
-            toastMessage = "Password reset link sent to provided email \uD83D\uDCE9",
+            text = stringResource(R.string.forgot_password),
+            toastMessage = stringResource(R.string.password_reset_link_sent_to_provided_email),
             auth = FirebaseAuth.getInstance(),
             email = emailToSend
         )
@@ -139,10 +141,15 @@ fun ClickableTextWithToast(
                         Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
                     }
                     .addOnFailureListener { e ->
-                        Toast.makeText(context, "Failed to send reset email: ${e.localizedMessage}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,
+                            context.getString(
+                                R.string.failed_to_send_reset_email,
+                                e.localizedMessage
+                            ), Toast.LENGTH_SHORT).show()
                     }
             } else {
-                Toast.makeText(context, "Please enter your email address before resetting your password", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context,
+                    context.getString(R.string.please_enter_your_email_address_before_resetting_your_password), Toast.LENGTH_SHORT).show()
             }
         }
     )
