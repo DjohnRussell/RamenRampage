@@ -122,7 +122,7 @@ fun NavigationInApplication(auth: FirebaseAuth) {
                     navigationIcon = {
 
                         IconButton(onClick = {
-                            TODO()
+                            navController.navigateUp()
                         }) {
                             Icon(
                                 imageVector = Icons.Outlined.ArrowBack,
