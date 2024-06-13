@@ -40,6 +40,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
@@ -86,13 +87,13 @@ fun NavigationInApplication(auth: FirebaseAuth) {
 
             // TopAppBar title based on currentRoute
             val title = when (currentRoute) {
-                AppScreens.Discover.name -> "Discover"
-                AppScreens.Feed.name -> "Activity"
-                AppScreens.LocationSpotted.name -> "Location Spotted"
-                AppScreens.Profile.name -> "Profile"
-                AppScreens.Message.name -> "Message"
-                AppScreens.Login.name -> "Login"
-                AppScreens.Register.name -> "Register"
+                AppScreens.Discover.name -> stringResource(R.string.discover)
+                AppScreens.Feed.name -> stringResource(R.string.activity)
+                AppScreens.LocationSpotted.name -> stringResource(R.string.location_spotted)
+                AppScreens.Profile.name -> stringResource(R.string.profile)
+                AppScreens.Message.name -> stringResource(R.string.message)
+                AppScreens.Login.name -> stringResource(R.string.login)
+                AppScreens.Register.name -> stringResource(R.string.register)
                 // Add other screens
                 else -> "Ramen Rampage"
             }
@@ -137,10 +138,12 @@ fun NavigationInApplication(auth: FirebaseAuth) {
 
                                 }) {
                                     Icon(
-                                        imageVector = Icons.Outlined.Settings,
+                                     imageVector = Icons.Outlined.Settings,
                                         contentDescription = "User Settings",
                                         tint =  colorResource(id = R.color.blueberry_ble)
                                     )
+
+
                                 }
                             }
                         else {

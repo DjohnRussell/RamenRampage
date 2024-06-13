@@ -13,4 +13,12 @@
     <string name="sign_up">Opprett konto</string>
     <string name="login_or_sign_up">Logg inn eller Registrer</string>
     <string name="deal_with_it_later">Gjør det senere</string>
+
+    <string name="discover">Oppdag</string>
+    <string name="activity">Aktivitet</string>
+    <string name="location_spotted">Lokasjon sett</string>
+    <string name="profile">Profil</string>
+    <string name="message">Meldinger</string>
+    <string name="login">Logg inn</string>
+    <string name="register">Registrer</string>
 </resources>

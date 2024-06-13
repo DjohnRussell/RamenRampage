@@ -12,4 +12,12 @@
     <string name="sign_up">Sign up</string>
     <string name="login_or_sign_up">Login or Sign Up</string>
     <string name="deal_with_it_later">Deal with it later</string>
+    <string name="discover">Discover</string>
+    <string name="activity">Activity</string>
+    <string name="location_spotted">Location Spotted</string>
+    <string name="profile">Profile</string>
+    <string name="message">Message</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+
 </resources>

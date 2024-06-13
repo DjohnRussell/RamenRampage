@@ -17,6 +17,4 @@ fun Profile(throwOut: () -> Unit) {
         text = "Logout",
         colorText = colorResource(id = R.color.blueberry_ble))
 
-
-
 }

@@ -7,10 +7,18 @@
     <string name="incorrect_email_or_password_please_try_again">خطأ في البريد الإلكتروني أو كلمة المرور يرجى إعادة المحاولة‼️</string>
     <string name="register_now">التسجيل الآن</string>
     <string name="forgot_password">نسيت كلمة المرور?</string>
-    <string name="password_reset_link_sent_to_provided_email">Passord link sendt til den oppgitte E-post addresen 📩</string>
-    <string name="failed_to_send_reset_email">Tilbakestillings link feilet: %1$s</string>
+    <string name="password_reset_link_sent_to_provided_email">لقد تم إرسال رابط إعادة تعيين كلمة المرور إلى البريد الإلكتروني 📩</string>
+    <string name="failed_to_send_reset_email">خطأ في إعادة التعيين: %1$s</string>
     <string name="please_enter_your_email_address_before_resetting_your_password">الرجاء إدخال عنوان البريد الإلكتروني قبل إعادة تعيين كلمة المرور</string>
     <string name="sign_up">التسجيل الآن</string>
     <string name="login_or_sign_up">التسجيل او تسجيل الدخول</string>
     <string name="deal_with_it_later">المتابعة لاحقاً</string>
+
+    <string name="discover">Discover</string>
+    <string name="activity">النشاطات</string>
+    <string name="location_spotted">Location Spotted</string>
+    <string name="profile">الملف الشخصي</string>
+    <string name="message">الرسائل</string>
+    <string name="login">دخول</string>
+    <string name="register">Register</string>
 </resources>
