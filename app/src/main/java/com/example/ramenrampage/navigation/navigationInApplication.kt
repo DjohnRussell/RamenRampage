@@ -273,7 +273,7 @@ fun NavigationInApplication(auth: FirebaseAuth) {
             composable(AppScreens.Search.name) {
                 isBottomBarVisible.value = true
                 isTopAppVisible.value = true
-                Search()}
+                Search(takeMeToDiscover = {navController.navigate(AppScreens.Discover.name)})}
 
 
 

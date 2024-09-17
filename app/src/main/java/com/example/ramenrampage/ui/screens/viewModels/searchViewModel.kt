@@ -45,7 +45,7 @@ private val allNoodles = listOf(
 
     Noodles(
         0,
-        "Nissin-Chicken",
+        "Nissin",
         "Pack",
         "Egg-Noodle",
         "Japan",
@@ -55,7 +55,7 @@ private val allNoodles = listOf(
 
     Noodles(
         0,
-        "Nissin-Beef",
+        "Shin",
         "Pack",
         "Egg-Noodle",
         "Japan",
@@ -64,7 +64,25 @@ private val allNoodles = listOf(
     ),
     Noodles(
         0,
-        "Nissin-Pork",
+        "MrLee",
+        "Pack",
+        "Egg-Noodle",
+        "Japan",
+        4.5,
+        ""
+    ),
+    Noodles(
+        0,
+        "Samyang",
+        "Pack",
+        "Egg-Noodle",
+        "Japan",
+        4.5,
+        ""
+    ),
+    Noodles(
+        0,
+        "Baldak",
         "Pack",
         "Egg-Noodle",
         "Japan",
