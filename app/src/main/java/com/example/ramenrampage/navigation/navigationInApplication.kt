@@ -1,6 +1,5 @@
 package com.example.ramenrampage.navigation
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -16,17 +15,23 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.MailOutline
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -38,7 +43,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -55,7 +60,7 @@ import com.example.ramenrampage.ui.screens.Login_registerScreen
 import com.example.ramenrampage.ui.screens.MessageScreen
 import com.example.ramenrampage.ui.screens.Profile
 import com.example.ramenrampage.ui.screens.RegisterScreen
-import com.example.ramenrampage.ui.screens.ToastToShow
+import com.example.ramenrampage.ui.screens.Search
 import com.example.ramenrampage.ui.screens.WelcomeScreen
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -85,6 +90,7 @@ fun NavigationInApplication(auth: FirebaseAuth) {
                 )
             )
 
+
             // TopAppBar title based on currentRoute
             val title = when (currentRoute) {
                 AppScreens.Discover.name -> stringResource(R.string.discover)
@@ -94,6 +100,9 @@ fun NavigationInApplication(auth: FirebaseAuth) {
                 AppScreens.Message.name -> stringResource(R.string.message)
                 AppScreens.Login.name -> stringResource(R.string.login)
                 AppScreens.Register.name -> stringResource(R.string.register)
+                AppScreens.Search.name -> ""
+                // TODO:
+                //  add the search title or a searchbar
                 // Add other screens
                 else -> "Ramen Rampage"
             }
@@ -136,6 +145,7 @@ fun NavigationInApplication(auth: FirebaseAuth) {
                             if (currentUser != null){
                                 IconButton(onClick = {
 
+
                                 }) {
                                     Icon(
                                      imageVector = Icons.Outlined.Settings,
@@ -163,6 +173,7 @@ fun NavigationInApplication(auth: FirebaseAuth) {
         }
     }, bottomBar = {
         if (isBottomBarVisible.value) {
+
             BottomAppBar(containerColor = colorResource(R.color.orange_500)) {
                 Row(
                     modifier = Modifier
@@ -259,18 +270,28 @@ fun NavigationInApplication(auth: FirebaseAuth) {
                 RegisterScreen(toLogin = {navController.navigate(AppScreens.Login.name)})
             }
 
-        }
+            composable(AppScreens.Search.name) {
+                isBottomBarVisible.value = true
+                isTopAppVisible.value = true
+                Search()}
+
+
 
         }
 
         }
+
+        }
+
+
 
 //List of Icons and text for navbar(bottom bar)
 val items = listOf(
 
     BottomNavItems(AppScreens.Feed, Icons.Outlined.MoreVert, "Activity"),
     BottomNavItems(AppScreens.Message, Icons.Outlined.MailOutline, "Message"),
-    BottomNavItems(AppScreens.Profile, Icons.Outlined.Person, "Profile")
+    BottomNavItems(AppScreens.Profile, Icons.Outlined.Person, "Profile"),
+    BottomNavItems(AppScreens.Search, Icons.Outlined.Search, "Search")
 )
 
 
@@ -280,7 +301,12 @@ private fun determineStartDestination(currentUser: FirebaseUser?): String {
     } else {
         AppScreens.Welcome.name
     }
+
 }
+
+
+
+
 
 
 
