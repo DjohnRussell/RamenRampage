@@ -20,6 +20,7 @@ import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.MailOutline
 import androidx.compose.material.icons.outlined.MoreVert
+import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Settings
@@ -48,6 +49,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -62,6 +64,7 @@ import com.example.ramenrampage.ui.screens.Profile
 import com.example.ramenrampage.ui.screens.RegisterScreen
 import com.example.ramenrampage.ui.screens.Search
 import com.example.ramenrampage.ui.screens.WelcomeScreen
+import com.example.ramenrampage.ui.screens.viewModels.Notification
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -97,11 +100,12 @@ fun NavigationInApplication(auth: FirebaseAuth) {
                 AppScreens.Discover.name -> stringResource(R.string.discover)
                 AppScreens.Feed.name -> stringResource(R.string.activity)
                 AppScreens.LocationSpotted.name -> stringResource(R.string.location_spotted)
-                AppScreens.Profile.name -> stringResource(R.string.profile)
+                AppScreens.Profile.name -> "It´s You"
                 AppScreens.Message.name -> stringResource(R.string.message)
                 AppScreens.Login.name -> stringResource(R.string.login)
                 AppScreens.Register.name -> stringResource(R.string.register)
-                AppScreens.Search.name -> ""
+                AppScreens.Search.name -> "Noodle hunt"
+                AppScreens.Notification.name -> "Whats´s Cooking"
                 // TODO:
                 //  add the search title or a searchbar
                 // Add other screens
@@ -287,7 +291,15 @@ fun NavigationInApplication(auth: FirebaseAuth) {
                 isBottomBarVisible.value = true
                 isTopAppVisible.value = true
                 isFloatingActionButtonVisible.value = false
-                Search(takeMeToDiscover = {navController.navigate(AppScreens.Discover.name)})}
+                Search(takeMeToDiscover = {navController.navigate(AppScreens.Discover.name)})
+            }
+
+            composable(AppScreens.Notification.name) {
+                isBottomBarVisible.value = true
+                isTopAppVisible.value = true
+                isFloatingActionButtonVisible.value = false
+                Notification()
+            }
 
 
 
@@ -305,7 +317,7 @@ val items = listOf(
     BottomNavItems(AppScreens.Feed, Icons.Outlined.MoreVert, "Activity"),
     BottomNavItems(AppScreens.Message, Icons.Outlined.MailOutline, "Message"),
     BottomNavItems(AppScreens.Profile, Icons.Outlined.Person, "Profile"),
-    //BottomNavItems(AppScreens.Search, Icons.Outlined.Search, "Search")
+    BottomNavItems(AppScreens.Notification, Icons.Outlined.Notifications, "Notification")
 )
 
 
@@ -320,7 +332,11 @@ private fun determineStartDestination(currentUser: FirebaseUser?): String {
 
 @Composable
 fun SearchFloatingAction( toSearch: ()-> Unit) {
-    FloatingActionButton(onClick = { toSearch()}) {
+    FloatingActionButton(onClick = { toSearch()},
+        containerColor = colorResource(id = R.color.blueberry_ble),
+        contentColor = Color.White
+
+        ) {
         Icon(imageVector = Icons.Default.Add, contentDescription =" Add Action" )
     }
 }

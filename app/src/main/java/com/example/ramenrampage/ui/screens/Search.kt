@@ -1,5 +1,6 @@
 package com.example.ramenrampage.ui.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -12,8 +13,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -47,10 +52,14 @@ fun Search(takeMeToDiscover : ()->Unit) {
             .fillMaxSize()
             .padding(16.dp)
     ) {
+
+
+
         TextField(value = searchText ,
             onValueChange = viewModel::onSearchTextChange,
             modifier = Modifier.fillMaxWidth(),
-            placeholder = {Text("Name, Brand or Country")}
+            placeholder = {Text("Name, Brand or Country")},
+            trailingIcon = { Icon(imageVector = Icons.Filled.Search, contentDescription = "search icon" )}
         )
         Spacer(modifier= Modifier.height(16.dp))
         LazyColumn(
@@ -155,6 +164,8 @@ fun FancyNoodleCard(text1: String, text2: String, brand: String, takeMeToDiscove
         }
     }
 }
+
+
 
 
 

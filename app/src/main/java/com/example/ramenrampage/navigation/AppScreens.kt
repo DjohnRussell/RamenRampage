@@ -9,5 +9,6 @@ enum class AppScreens {
     Welcome,
     Login,
     Register,
-    Search
+    Search,
+    Notification
 }

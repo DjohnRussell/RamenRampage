@@ -23,4 +23,8 @@ data class pathToImages(
     var maggi : String = "",
     var Demae : String = "",
     var NongShim : String = "",
+
+    //PLaceholder Image
+    var profileImagePlaceHolder : String = "https://surgassociates.com/wp-content/uploads/610-6104451_image-placeholder-png-user-profile-placeholder-image-png-1.jpg",
+    var noodlePic : String = "https://img.freepik.com/free-photo/top-view-delicious-noodles-concept_23-2148773774.jpg?t=st=1728510734~exp=1728514334~hmac=10d7952bef18feffc371cc91ea36e7fbc0e34862ba95b83305adba455337ea6d&w=2000"
     )
