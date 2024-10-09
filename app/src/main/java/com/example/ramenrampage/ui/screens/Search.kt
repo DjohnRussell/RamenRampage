@@ -97,11 +97,11 @@ fun FancyNoodleCard(text1: String, text2: String, brand: String, takeMeToDiscove
             ) {
                 // Conditionally load images based on the brand
                 val imagePath = when (brand) {
-                    "Shin" -> pathToImages().shin
-                    "MrLee" -> pathToImages().mrlee
+                    "Shin Ramyun" -> pathToImages().shin
+                    "Mr.Lee" -> pathToImages().mrlee
                     "Nissin" -> pathToImages().nissin
                     "Samyang" -> pathToImages().samyang
-                    "Baldak" -> pathToImages().baldak
+                    "Buldak" -> pathToImages().buldak
 
                     else -> painterResource(id = R.drawable.untitled_artwork) // Default image if the brand doesn't match
                 }
@@ -122,7 +122,17 @@ fun FancyNoodleCard(text1: String, text2: String, brand: String, takeMeToDiscove
 
                 Spacer(modifier = Modifier.weight(1f)) // Spacer to push the second image to the right
 
-                loadImage(path = pathToImages().japan, height = 40, width = 40) // Second image remains static
+                val imagePathFlag = when (brand) {
+                    "Shin Ramyun" -> pathToImages().southKorea
+                    "Mr.Lee" -> pathToImages().norge
+                    "Nissin" -> pathToImages().japan
+                    "Samyang" -> pathToImages().southKorea
+                    "Buldak" -> pathToImages().southKorea
+
+                    else -> painterResource(id = R.drawable.untitled_artwork) // Default image if the brand doesn't match
+                }
+
+                loadImage(path = imagePathFlag.toString(), height = 40, width = 40) // Second image remains static
             }
 
             Spacer(modifier = Modifier.height(8.dp)) // Space between rows
@@ -131,6 +141,8 @@ fun FancyNoodleCard(text1: String, text2: String, brand: String, takeMeToDiscove
                 horizontalArrangement = Arrangement.Center, // Center the style text in the row
                 modifier = Modifier.fillMaxWidth()
             ) {
+
+
                 Text(
                     text = text2,
                     style = MaterialTheme.typography.bodyLarge.copy(

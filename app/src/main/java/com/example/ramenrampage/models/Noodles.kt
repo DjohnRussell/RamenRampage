@@ -1,13 +1,14 @@
 package com.example.ramenrampage.models
 
 data class Noodles(
-    val review : Int = 0,
+
     val brand : String = " ",
+    val name : String = " ",
+    //val producent : String = "",
     val variety : String = " ",
     val style : String = " ",
     val country : String = " ",
-    val stars : Double = 0.0,
-    val topTen : String? = null
+
 
 )
 {

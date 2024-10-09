@@ -22,15 +22,7 @@ fun ActivityFeedScreen() {
 
     }
 
-    FlotingActionButton()
+
 }
 
-@Composable
-fun FlotingActionButton(
-
-) {
-    FloatingActionButton(onClick = { /*TODO*/ }) {
-        Icon(imageVector = Icons.Default.Add, contentDescription =" Add Action" )
-    }
-}
 

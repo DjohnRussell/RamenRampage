@@ -72,6 +72,7 @@ fun NavigationInApplication(auth: FirebaseAuth) {
     val navController = rememberNavController()
     val isBottomBarVisible = remember { mutableStateOf(true) }
     val isTopAppVisible = remember { mutableStateOf(true) }
+    val isFloatingActionButtonVisible = remember { mutableStateOf(true) }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
     val currentSelectedItem = remember { mutableStateOf(AppScreens.Discover) }
@@ -210,6 +211,10 @@ fun NavigationInApplication(auth: FirebaseAuth) {
                 }
             }
         }
+    }, floatingActionButton = {
+        if (isFloatingActionButtonVisible.value){
+            SearchFloatingAction(toSearch = {navController.navigate(AppScreens.Search.name)})
+        }
     }
 
     ) { innerPadding ->
@@ -222,37 +227,44 @@ fun NavigationInApplication(auth: FirebaseAuth) {
             composable(AppScreens.Welcome.name) {
                 isTopAppVisible.value = false
                 isBottomBarVisible.value = false
+                isFloatingActionButtonVisible.value = false
                 WelcomeScreen(start = {navController.navigate(AppScreens.Discover.name)},
                     loginOrSignUp = {navController.navigate(AppScreens.Login.name)})}
 
             composable(AppScreens.Discover.name) {
                 isBottomBarVisible.value = true
                 isTopAppVisible.value = true
+                isFloatingActionButtonVisible.value = true
                 DiscoverScreen()}
 
             composable(AppScreens.Feed.name) {
                 isBottomBarVisible.value = true
                 isTopAppVisible.value = true
+                isFloatingActionButtonVisible.value = true
                 ActivityFeedScreen()}
 
             composable(AppScreens.LocationSpotted.name) {
                 isBottomBarVisible.value = true
                 isTopAppVisible.value = true
+                isFloatingActionButtonVisible.value = true
                 ActivtyLocationSpotted()}
 
             composable(AppScreens.Profile.name) {
                 isBottomBarVisible.value = true
                 isTopAppVisible.value = true
+                isFloatingActionButtonVisible.value = true
                 Profile(throwOut = {navController.navigate(AppScreens.Welcome.name)})}
 
             composable(AppScreens.Message.name) {
                 isBottomBarVisible.value = true
                 isTopAppVisible.value = true
+                isFloatingActionButtonVisible.value = true
                 MessageScreen()}
 
             composable(AppScreens.Login.name) {
                 isBottomBarVisible.value = false
                 isTopAppVisible.value = true
+                isFloatingActionButtonVisible.value = false
                 Login_registerScreen(
                     takeMeHome = {
                         // checking if user credentials is a match
@@ -267,12 +279,14 @@ fun NavigationInApplication(auth: FirebaseAuth) {
             composable(AppScreens.Register.name) {
                 isBottomBarVisible.value = false
                 isTopAppVisible.value = true
+                isFloatingActionButtonVisible.value = false
                 RegisterScreen(toLogin = {navController.navigate(AppScreens.Login.name)})
             }
 
             composable(AppScreens.Search.name) {
                 isBottomBarVisible.value = true
                 isTopAppVisible.value = true
+                isFloatingActionButtonVisible.value = false
                 Search(takeMeToDiscover = {navController.navigate(AppScreens.Discover.name)})}
 
 
@@ -291,7 +305,7 @@ val items = listOf(
     BottomNavItems(AppScreens.Feed, Icons.Outlined.MoreVert, "Activity"),
     BottomNavItems(AppScreens.Message, Icons.Outlined.MailOutline, "Message"),
     BottomNavItems(AppScreens.Profile, Icons.Outlined.Person, "Profile"),
-    BottomNavItems(AppScreens.Search, Icons.Outlined.Search, "Search")
+    //BottomNavItems(AppScreens.Search, Icons.Outlined.Search, "Search")
 )
 
 
@@ -303,6 +317,14 @@ private fun determineStartDestination(currentUser: FirebaseUser?): String {
     }
 
 }
+
+@Composable
+fun SearchFloatingAction( toSearch: ()-> Unit) {
+    FloatingActionButton(onClick = { toSearch()}) {
+        Icon(imageVector = Icons.Default.Add, contentDescription =" Add Action" )
+    }
+}
+
 
 
 

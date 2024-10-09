@@ -150,7 +150,8 @@ fun ButtonWithToast(
         if (currentUser == null) {
             Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show()
         }
-    }) {
+    },
+        ) {
         Text(text = buttonText)
     }
 }

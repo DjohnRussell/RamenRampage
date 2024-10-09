@@ -44,50 +44,45 @@ class searchViewModel : ViewModel(){
 private val allNoodles = listOf(
 
     Noodles(
-        0,
         "Nissin",
+        "Demae Ramen Biff",
         "Pack",
         "Egg-Noodle",
         "Japan",
-        3.5,
-        ""
+
     ),
 
     Noodles(
-        0,
-        "Shin",
+        "Shin Ramyun",
+        "Black",
         "Pack",
         "Egg-Noodle",
-        "Japan",
-        3.2,
-        ""
+        "South Korea",
+
     ),
     Noodles(
-        0,
-        "MrLee",
+        "Mr.Lee",
+        "Chicken",
         "Pack",
         "Egg-Noodle",
-        "Japan",
-        4.5,
-        ""
+        "Norway",
+
     ),
     Noodles(
-        0,
         "Samyang",
+        "Spicy Flavor",
         "Pack",
         "Egg-Noodle",
-        "Japan",
-        4.5,
-        ""
+        "South Korea",
+
     ),
     Noodles(
-        0,
-        "Baldak",
+        "Buldak",
+        "HOT Chicken Flavor Ramen",
         "Pack",
         "Egg-Noodle",
-        "Japan",
-        4.5,
-        ""
+        "South Korea",
+
     ),
 
 
