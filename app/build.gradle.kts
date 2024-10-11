@@ -93,6 +93,8 @@ dependencies {
     //Glide -> http image loader
     implementation ("com.github.bumptech.glide:compose:1.0.0-beta01")
 
+    implementation("com.google.firebase:firebase-firestore-ktx:24.4.2")
+
 
 
 

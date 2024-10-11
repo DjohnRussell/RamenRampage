@@ -1,6 +1,7 @@
 package com.example.ramenrampage.ui.screens
 
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,8 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.shadow
@@ -36,17 +39,20 @@ import com.example.ramenrampage.R
 import com.example.ramenrampage.models.loadImage
 import com.example.ramenrampage.models.loadImageAndClick
 import com.example.ramenrampage.models.pathToImages
+import com.google.firebase.auth.FirebaseAuth
+lateinit var auth: FirebaseAuth
+
+
+
 
 @Composable
 fun Profile(throwOut: () -> Unit) {
     val firebaseViewModel: FirebaseViewModel = viewModel()
 
-   // TextAndClick(loginOrSignUp = {
-   //     firebaseViewModel.logOut()
-   //     throwOut()
-   //     },
-   //     text = "Logout",
-   //     colorText = colorResource(id = R.color.blueberry_ble))
+    LaunchedEffect(Unit) {
+        firebaseViewModel.fetchUserProfileName() // Ensure you call this to fetch the username
+        firebaseViewModel.fetchMemberSinceDate()
+    }
 
 
     LazyColumn(
@@ -62,7 +68,17 @@ fun Profile(throwOut: () -> Unit) {
         }
 
         item {
+
             StatCard()
+        }
+
+        item {
+            TextAndClick(loginOrSignUp = {
+                firebaseViewModel.logOut()
+                throwOut()
+            },
+                text = "Logout",
+                colorText = colorResource(id = R.color.blueberry_ble))
         }
     }
 
@@ -81,6 +97,8 @@ fun ProfilePicAndInfo( ) {
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun StyleCard(path: String, height: Int, width: Int) {
+    val firebaseViewModel: FirebaseViewModel = viewModel()
+    val username = firebaseViewModel.username
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -110,16 +128,28 @@ fun StyleCard(path: String, height: Int, width: Int) {
 
             Spacer(modifier = Modifier.padding(5.dp))
             Column {
-                Text("Username",
+
+
+
+                Text(
+                    text = firebaseViewModel.userProfileName.value,
                     style = MaterialTheme.typography.headlineLarge.copy(
-                        fontSize = 17.sp, // Larger font size
-                        fontWeight = FontWeight.Medium, // Medium text weight
-                        color = Color.White
-                    ))
+                        fontSize = 18.sp, // Make the text larger for emphasis
+                        fontWeight = FontWeight.Bold, // Use bold weight for a strong appearance
+                        color = Color.White, // Keep the text color white, you can experiment with other colors
+                        letterSpacing = 2.sp // Adds space between letters to make the text more stylish
+                    ),
+                    modifier = Modifier
+                        .padding(1.dp) // Add padding to give the text breathing room
+                        .shadow(8.dp, shape = RoundedCornerShape(2.dp)) // Adds a shadow for emphasis
+                        .background(Color(0xFF49de24f), RoundedCornerShape(10.dp)) // Optional background color
+                        .padding(horizontal = 3.dp, vertical = 1.dp), // Inner padding for text
+                    textAlign = TextAlign.Center // Center align the text for a balanced look
+                )
 
                 SpaceEm(height = 15.dp)
 
-                Text("Member since: ",
+                Text("Member since: "  + firebaseViewModel.memberSince.value,
                     style = MaterialTheme.typography.bodySmall.copy(
                         fontSize = 17.sp, // Larger font size
                         fontWeight = FontWeight.Medium, // Medium text weight

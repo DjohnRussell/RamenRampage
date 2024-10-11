@@ -45,6 +45,11 @@ fun RegisterScreen(toLogin: ()-> Unit) {
     ) {
 
 
+        OutlinedTextField(value = firebaseViewModel.username.value,
+            onValueChange =  {newValue -> firebaseViewModel.username.value = newValue},
+            label = { Text(text = "Username") },
+            textStyle = TextStyle(color = colorResource(id = R.color.blueberry_ble))
+        )
 
 
         SpaceEm(16)
