@@ -22,17 +22,13 @@ import androidx.compose.material.icons.outlined.MailOutline
 import androidx.compose.material.icons.outlined.MoreVert
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Person
-import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -44,12 +40,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -57,6 +51,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.ramenrampage.R
 import com.example.ramenrampage.ui.screens.ActivityFeedScreen
 import com.example.ramenrampage.ui.screens.ActivtyLocationSpotted
+import com.example.ramenrampage.ui.screens.AllPhotosOfConsumed
 import com.example.ramenrampage.ui.screens.DiscoverScreen
 import com.example.ramenrampage.ui.screens.Login_registerScreen
 import com.example.ramenrampage.ui.screens.MessageScreen
@@ -64,7 +59,7 @@ import com.example.ramenrampage.ui.screens.Profile
 import com.example.ramenrampage.ui.screens.RegisterScreen
 import com.example.ramenrampage.ui.screens.Search
 import com.example.ramenrampage.ui.screens.WelcomeScreen
-import com.example.ramenrampage.ui.screens.viewModels.Notification
+import com.example.ramenrampage.ui.screens.Notification
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -257,7 +252,8 @@ fun NavigationInApplication(auth: FirebaseAuth) {
                 isBottomBarVisible.value = true
                 isTopAppVisible.value = true
                 isFloatingActionButtonVisible.value = true
-                Profile(throwOut = {navController.navigate(AppScreens.Welcome.name)})}
+                Profile(throwOut = {navController.navigate(AppScreens.Welcome.name)},
+                    allPics = {navController.navigate(AppScreens.Consumed.name)})}
 
             composable(AppScreens.Message.name) {
                 isBottomBarVisible.value = true
@@ -301,6 +297,13 @@ fun NavigationInApplication(auth: FirebaseAuth) {
                 Notification()
             }
 
+            composable(AppScreens.Consumed.name) {
+                isBottomBarVisible.value = true
+                isTopAppVisible.value = true
+                isFloatingActionButtonVisible.value = true
+                AllPhotosOfConsumed()
+            }
+
 
 
         }
@@ -340,11 +343,6 @@ fun SearchFloatingAction( toSearch: ()-> Unit) {
         Icon(imageVector = Icons.Default.Add, contentDescription =" Add Action" )
     }
 }
-
-
-
-
-
 
 
 

@@ -1,4 +1,4 @@
-package com.example.ramenrampage.ui.screens.viewModels
+package com.example.ramenrampage.ui.screens
 
 import androidx.compose.runtime.Composable
 

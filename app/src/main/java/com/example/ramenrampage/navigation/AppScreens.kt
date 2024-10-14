@@ -10,5 +10,6 @@ enum class AppScreens {
     Login,
     Register,
     Search,
-    Notification
+    Notification,
+    Consumed
 }
