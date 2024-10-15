@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -33,6 +34,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
@@ -51,6 +53,8 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.example.ramenrampage.ui.screens.viewModels.FirebaseViewModel
 import com.example.ramenrampage.R
+import com.example.ramenrampage.models.Badge
+import com.example.ramenrampage.models.badgesList
 import com.example.ramenrampage.models.loadImage
 import com.example.ramenrampage.models.loadImageAndClick
 import com.example.ramenrampage.models.pathToImages
@@ -85,11 +89,15 @@ fun Profile(throwOut: () -> Unit, allPics: () -> Unit) {
 
         item {
 
-            ProfileNoodleCard(Heading = "Noodles")
+            ProfileNoodleCard(Heading = "Stats")
         }
 
         item {
             PictureOfConsumedNoodleCard(Heading = "Photos", allPics = allPics)
+        }
+
+        item { 
+            BadgeCard(Heading = "Badges")
         }
 
         item {
@@ -100,6 +108,7 @@ fun Profile(throwOut: () -> Unit, allPics: () -> Unit) {
                 text = "Logout",
                 colorText = colorResource(id = R.color.blueberry_ble))
         }
+
     }
 
 
@@ -228,10 +237,15 @@ fun ProfileNoodleCard(Heading : String) {
              modifier = Modifier.padding(3.dp, 7.dp))
      }
      
-     SpaceEm(height = 18.dp)
+     SpaceEm(height = 17.dp)
+
+     Text("Check-ins: 3/10", style = MaterialTheme.typography.bodyMedium)
 
      AnimatedProgressBar(progress = 0.10f)
-     Text("Check-ins: 3/10", style = MaterialTheme.typography.bodyMedium)
+
+     SpaceEm(height = 18.dp)
+
+     Text(" Total Check-ins:", style = MaterialTheme.typography.bodyMedium)
 
  }
 }
@@ -290,13 +304,9 @@ fun PictureOfConsumedNoodleCard(Heading : String, allPics : () -> Unit) {
                 item {
 
                     ImageRowInProfile()
-
                 }
             }
         }
-
-
-
 
     }
 }
@@ -309,10 +319,63 @@ fun ImageRowInProfile() {
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(15.dp) // Add space between the images
     ) {
-        repeat(10) { // 4 images per row
-            ImageItem(120, 120)
+        repeat(8) {
+            ImageItem(84, 84)
         }
     }
 }
+
+
+@Composable
+fun BadgeShow() {
+    badgesList.forEach { badge ->
+        if(badge.achieved) {
+            Card {
+                Text(text = badge.name)
+            }
+        }
+    }
+}
+
+@Composable
+fun BadgeCard(Heading: String) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(7.dp)
+            .shadow(8.dp, shape = RoundedCornerShape(2.dp)), // Adds shadow with rounded corners
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFFF5F5F5) // Light background
+        ),
+        shape = RoundedCornerShape(5.dp), // Rounded corners
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
+    ) {
+        Column {
+            Row(
+            ) {
+                Text(Heading,
+                    color = Color.Black,
+                    style = MaterialTheme.typography.headlineLarge.copy(
+                        fontSize = 16.sp, // Make the text larger for emphasis
+                        fontWeight = FontWeight.Bold, // Use bold weight for a strong appearance
+                        letterSpacing = 2.sp,
+
+                        ))
+
+            }
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(7.dp),
+            ) {
+                item {
+                    BadgeShow()
+                }
+            }
+        }
+
+    }
+}
+
 
 
