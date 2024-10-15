@@ -100,7 +100,9 @@ Contributions are welcome! Feel free to submit a pull request or open an issue f
 Created by Daniel John Russell
 
 Feel free to reach out for questions or collaboration opportunities!
-You can find me on [[LinkedIn](https://linkedin.com/in/yourprofile) ](https://www.linkedin.com/in/daniel-john-russell-02a1a513a/) or at: russelldanieljohn@gmail.com
+You can find me on
+LinkedIn : (https://www.linkedin.com/in/daniel-john-russell-02a1a513a/) or 
+contact me at: russelldanieljohn@gmail.com
 
 License 📄
 
