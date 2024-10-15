@@ -1,4 +1,3 @@
-Sure! Based on everything we’ve discussed so far, here’s a draft of a README file for your project:
 
 RamenRampage 🍜
 
