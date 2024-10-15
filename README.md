@@ -38,9 +38,10 @@ Firebase Setup 🔥
 
 Screens 📸
 
-	•	Login/Registration Screen: Allows users to sign in or register using their email and password.
+	•	LoginRegistration Screen: Allows users to sign in using their email and password.
+ 	•	Registration Screen:  Allows users to sign in using their email and password.
 	•	Profile Screen: Displays the user’s profile information, including their username, member since date, and profile picture. Users can click the profile picture to change it.
-	•	Noodle Log Screen: Shows all the noodle reviews and allows users to search and filter through their reviews.
+	•	Search Screen: Shows all the noodle  and allows users to search and filter through their reviews. Aswell as add them, upload picture and rate a "check -in"
 	•	Badge Screen: Shows earned and unearned badges, motivating users to reach noodle milestones.
 	•	Photo Gallery: Displays all uploaded photos of consumed noodles in rows and columns.
 
