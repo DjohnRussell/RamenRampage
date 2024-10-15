@@ -94,6 +94,12 @@ Contributing 🤝
 
 Contributions are welcome! Feel free to submit a pull request or open an issue for any improvements or bug fixes.
 
+## Author
+
+Created by Daniel John Russell
+
+Feel free to reach out for questions or collaboration opportunities!
+
 License 📄
 
 This project is licensed under the MIT License - see the LICENSE file for details.
